@@ -1,56 +1,54 @@
+# 📈 SVM Parameter Tuning on Letter Recognition Dataset
 
+## 📝 Summary
 
-# 📈 Parameter Optimization for SVM on Letter Recognition Dataset
-
-## 📝 Overview
-
-This project explores **Support Vector Machine (SVM)** classification using `scikit-learn` on a dataset where the target variable is `letter`.  
-The primary objective is to **tune the regularization parameter `C`** to maximize **test accuracy** across multiple train-test splits.
+This project focuses on using a **Support Vector Machine (SVM)** with an **RBF kernel** to classify letters.  
+The goal: **optimize the regularization parameter `C`** to maximize test accuracy across multiple data splits.
 
 ---
 
-## 🔧 Methodology
+## 🔧 Approach
 
-### 1. Data Preprocessing
-- The target variable `letter` is **encoded numerically** using `LabelEncoder`.
-- Feature matrix `X` and label vector `y` are extracted from the dataset.
+### 1. Data Preparation
+- Encoded the `letter` column numerically using `LabelEncoder`.
+- Extracted features (`X`) and target labels (`y`) from the dataset.
 
-### 2. Model Training & Hyperparameter Tuning
-- The experiment is repeated over **10 different train-test splits**, with:
-  - `test_size = 0.3`
-  - `random_state` ranging from `0` to `9`
-
+### 2. Training & Tuning
+- Performed 10 separate train-test splits with:
+  - 70% training and 30% testing data
+  - `random_state` values from 0 to 9
 - For each split:
-  - 100 values of the regularization parameter `C` are tested, **linearly spaced between `0.1` and `10`**.
-  - An SVM model with an **RBF kernel** is trained for each value of `C`.
-  - The corresponding **test accuracy** is recorded.
-  - The **best value of `C`** and its **associated accuracy** are saved.
+  - Tested 100 `C` values linearly spaced between 0.1 and 10
+  - Trained an SVM with RBF kernel for each value
+  - Recorded test accuracy and identified the best `C` value per split
 
 ---
 
 ## 📊 Results
 
-### 🏆 Best Parameters and Accuracies
+### 🔍 Top Accuracy & Corresponding Parameters
 
-| Split | Accuracy | Best Parameters |
-|-------|----------|-----------------|
-| 0     | 0.9673   | `{'C': 10.0, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 1     | 0.9623   | `{'C': 9.9, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 2     | 0.9632   | `{'C': 10.0, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 3     | 0.9617   | `{'C': 10.0, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 4     | 0.9592   | `{'C': 10.0, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 5     | 0.9610   | `{'C': 9.7, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 6     | 0.9582   | `{'C': 10.0, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 7     | 0.9643   | `{'C': 8.5, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 8     | 0.9652   | `{'C': 9.7, 'kernel': 'rbf', 'gamma': 'scale'}` |
-| 9     | 0.9635   | `{'C': 9.9, 'kernel': 'rbf', 'gamma': 'scale'}` |
+| Split | Accuracy | Best `C` Value |
+|-------|----------|----------------|
+| 0     | 0.9673   | `C=10.0`       |
+| 1     | 0.9623   | `C=9.9`        |
+| 2     | 0.9632   | `C=10.0`       |
+| 3     | 0.9617   | `C=10.0`       |
+| 4     | 0.9592   | `C=10.0`       |
+| 5     | 0.9610   | `C=9.7`        |
+| 6     | 0.9582   | `C=10.0`       |
+| 7     | 0.9643   | `C=8.5`        |
+| 8     | 0.9652   | `C=9.7`        |
+| 9     | 0.9635   | `C=9.9`        |
+
+> All models used: `kernel='rbf', gamma='scale'`
 
 ---
 
-## 📈 Convergence Graph
+## 📈 Accuracy vs. `C` (Split 0)
 
-- A convergence graph was generated for the **best-performing split** (Split 0, Accuracy: **0.9673**).
-- The plot shows **test accuracy vs. `C` value** across 100 iterations.
+The following plot shows how test accuracy changes with different `C` values for the **best-performing split (Split 0)**:
 
-> ![435424403-3b77f833-97db-4417-a75b-e313868da1c6](https://github.com/user-attachments/assets/df0080fc-978a-4734-b169-2a2cdee0e251)
->  *This visual helps understand how accuracy evolves with varying regularization strength and guides optimal hyperparameter selection.*
+![Convergence Graph](https://github.com/user-attachments/assets/df0080fc-978a-4734-b169-2a2cdee0e251)
+
+> *This visualization highlights how accuracy improves with increasing regularization and helps identify the most effective `C` value.*
